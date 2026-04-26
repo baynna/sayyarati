@@ -19,7 +19,7 @@ z-index:999;
 .topbar a{
 background:#d4af37;
 color:#111;
-padding:12px 22px;
+padding:12px 20px;
 margin:6px;
 border-radius:30px;
 text-decoration:none;
@@ -33,7 +33,34 @@ color:#111;
 text-align:center;
 padding:14px;
 font-weight:bold;
-font-size:18px;
+}
+
+.request-banner{
+padding:80px 8%;
+background:#111;
+text-align:center;
+}
+
+.request-banner h2{
+font-size:54px;
+margin-bottom:20px;
+}
+
+.request-banner p{
+font-size:25px;
+color:#ddd;
+margin-bottom:35px;
+}
+
+.request-banner a{
+display:inline-block;
+background:#d4af37;
+color:#111;
+padding:20px 45px;
+border-radius:40px;
+text-decoration:none;
+font-weight:bold;
+font-size:22px;
 }
 
 .search-box{
@@ -53,7 +80,6 @@ border:none;
 border-radius:18px;
 background:#222;
 color:white;
-font-size:18px;
 }
 
 .search-btn{
@@ -61,7 +87,6 @@ background:#d4af37;
 border:none;
 border-radius:18px;
 font-weight:bold;
-font-size:18px;
 }
 
 .stats{
@@ -69,7 +94,6 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:25px;
 padding:70px 8%;
-background:#0c0c0c;
 }
 
 .stat{
@@ -77,93 +101,11 @@ background:#141414;
 padding:35px;
 border-radius:28px;
 text-align:center;
-box-shadow:0 0 20px rgba(212,175,55,.10);
 }
 
 .stat h3{
 font-size:42px;
 color:#d4af37;
-margin-bottom:10px;
-}
-
-.stat p{
-font-size:22px;
-color:#ddd;
-}
-
-.today{
-padding:80px 8%;
-background:#111;
-}
-
-.today h2,
-.arrivals h2{
-text-align:center;
-font-size:48px;
-margin-bottom:45px;
-}
-
-.today-card{
-max-width:1000px;
-margin:auto;
-background:#141414;
-border-radius:35px;
-overflow:hidden;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-box-shadow:0 0 30px rgba(212,175,55,.15);
-}
-
-.today-card img{
-width:100%;
-height:100%;
-min-height:360px;
-object-fit:cover;
-}
-
-.today-info{
-padding:45px;
-}
-
-.badge{
-display:inline-block;
-background:#d4af37;
-color:#111;
-padding:10px 22px;
-border-radius:30px;
-font-weight:bold;
-margin-bottom:25px;
-}
-
-.today-info h3{
-font-size:42px;
-margin-bottom:20px;
-}
-
-.today-info p{
-font-size:23px;
-margin:14px 0;
-color:#ddd;
-}
-
-.today-info .price{
-font-size:36px;
-color:#d4af37;
-margin-top:25px;
-}
-
-.card a{
-text-decoration:none;
-color:white;
-display:block;
-}
-
-.card{
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-8px);
 }
 
 .actions{
@@ -182,9 +124,29 @@ text-decoration:none;
 font-weight:bold;
 }
 
-.arrivals{
+.card a{
+text-decoration:none;
+color:white;
+display:block;
+}
+
+.card{
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.tools{
 padding:70px 8%;
-background:#0c0c0c;
+background:#111;
+text-align:center;
+}
+
+.tools h2{
+font-size:48px;
+margin-bottom:40px;
 }
 
 </style>
@@ -193,14 +155,16 @@ background:#0c0c0c;
 <body>
 
 <div class="ticker">
-🚗 42 سيارة جديدة أضيفت اليوم — 🔥 عروض مختارة من سيارتي — ⭐ سيارات موثقة للبيع بثقة
+🚗 سيارات جديدة يوميًا — ⭐ سيارات موثقة — 🔥 اطلب سيارتك بدل البحث الطويل
 </div>
 
 <div class="topbar">
 <a href="account.html">حسابي</a>
 <a href="dealers.html">المعارض</a>
 <a href="verified.html">موثقة</a>
+<a href="requests.html">اطلب سيارتك</a>
 </div>
+
 
 <section class="hero">
 
@@ -217,12 +181,13 @@ background:#0c0c0c;
 <div class="actions">
 <a href="#cars">تصفح السيارات</a>
 <a href="sell.html">اعرض سيارتك للبيع</a>
-<a href="verified.html">سيارات موثقة</a>
+<a href="requests.html">اطلب سيارتك</a>
 </div>
 
 </div>
 
 </section>
+
 
 <section class="stats">
 
@@ -243,36 +208,24 @@ background:#0c0c0c;
 
 </section>
 
-<section class="today">
 
-<h2>سيارة اليوم</h2>
+<section class="request-banner">
 
-<div class="today-card">
+<h2>
+لا تبحث عن السيارة… دع السيارة تصل إليك
+</h2>
 
-<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
+<p>
+أنشئ طلب شراء وحدد ميزانيتك بالدولار أو الدينار العراقي
+</p>
 
-<div class="today-info">
-
-<div class="badge">⭐ مختارة من سيارتي</div>
-
-<h3>Mercedes S-Class 2023</h3>
-
-<p>المدينة: بغداد</p>
-<p>قراءة العداد: 18,000 كم</p>
-<p>الحالة: ممتازة</p>
-<p>السيارة موثقة ومناسبة لمن يبحث عن الفخامة والراحة.</p>
-
-<div class="price">$42,000</div>
-
-<div class="actions">
-<a href="details.html">عرض التفاصيل</a>
-</div>
-
-</div>
-
-</div>
+<a href="requests.html">
+ابدأ طلب سيارة
+</a>
 
 </section>
+
+
 
 <div class="search-box">
 
@@ -285,6 +238,8 @@ background:#0c0c0c;
 </button>
 
 </div>
+
+
 
 <section id="cars" class="section">
 
@@ -320,39 +275,6 @@ background:#0c0c0c;
 
 </section>
 
-<section class="arrivals">
-
-<h2>وصل حديثًا</h2>
-
-<div class="cards">
-
-<div class="card">
-<a href="details.html">
-<img src="https://images.unsplash.com/photo-1549924231-f129b911e442">
-<h3>Range Rover Sport</h3>
-<p>2022 | أربيل | $69,000</p>
-</a>
-</div>
-
-<div class="card">
-<a href="details.html">
-<img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c">
-<h3>Toyota Land Cruiser</h3>
-<p>2021 | بغداد | $72,000</p>
-</a>
-</div>
-
-<div class="card">
-<a href="details.html">
-<img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d">
-<h3>Chevrolet Camaro</h3>
-<p>2020 | البصرة | $35,000</p>
-</a>
-</div>
-
-</div>
-
-</section>
 
 <section class="tools">
 
@@ -360,10 +282,11 @@ background:#0c0c0c;
 
 <div class="actions">
 <a href="pricing.html">سعر السوق العادل</a>
-<a href="verified.html">فحص السيارات الموثقة</a>
+<a href="verified.html">سيارات موثقة</a>
 </div>
 
 </section>
+
 
 <script src="js/app.js"></script>
 

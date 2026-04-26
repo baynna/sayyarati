@@ -9,6 +9,50 @@
 
 <style>
 
+.topbar{
+position:fixed;
+top:20px;
+left:30px;
+z-index:999;
+}
+
+.topbar a{
+background:#d4af37;
+color:#111;
+padding:12px 30px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.search-box{
+max-width:1000px;
+margin:50px auto;
+background:#141414;
+padding:30px;
+border-radius:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.search-box input{
+padding:18px;
+border:none;
+border-radius:18px;
+background:#222;
+color:white;
+font-size:18px;
+}
+
+.search-btn{
+background:#d4af37;
+border:none;
+border-radius:18px;
+font-weight:bold;
+font-size:18px;
+}
+
 .card a{
 text-decoration:none;
 color:white;
@@ -17,7 +61,6 @@ display:block;
 
 .card{
 transition:.3s;
-cursor:pointer;
 }
 
 .card:hover{
@@ -40,24 +83,7 @@ text-decoration:none;
 font-weight:bold;
 }
 
-.topbar{
-position:fixed;
-top:20px;
-left:30px;
-z-index:999;
-}
-
-.topbar a{
-background:#d4af37;
-color:#111;
-padding:12px 30px;
-border-radius:30px;
-text-decoration:none;
-font-weight:bold;
-}
-
 </style>
-
 </head>
 <body>
 
@@ -80,20 +106,29 @@ font-weight:bold;
 </p>
 
 <div class="actions">
-
-<a href="#cars">
-تصفح السيارات
-</a>
-
-<a href="sell.html">
-اعرض سيارتك للبيع
-</a>
-
+<a href="#cars">تصفح السيارات</a>
+<a href="sell.html">اعرض سيارتك للبيع</a>
 </div>
 
 </div>
 
 </section>
+
+
+<div class="search-box">
+
+<input placeholder="الماركة">
+
+<input placeholder="المدينة">
+
+<input placeholder="السعر">
+
+<button class="search-btn">
+بحث
+</button>
+
+</div>
+
 
 
 <section id="cars" class="section">
@@ -125,19 +160,6 @@ font-weight:bold;
 <p>2023 | بغداد | $42,000</p>
 </a>
 </div>
-
-</div>
-
-
-<div class="actions">
-
-<a href="#">
-عرض المزيد
-</a>
-
-<a href="sell.html">
-أضف إعلان سيارة
-</a>
 
 </div>
 

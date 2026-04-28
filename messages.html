@@ -3,115 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>تفاصيل السيارة</title>
+<title>الرسائل</title>
 
 <link rel="stylesheet" href="css/main.css">
 
 <style>
 
-.details{
-padding:60px 8%;
-background:#0c0c0c;
+.page{
 min-height:100vh;
+background:#0c0c0c;
+padding:60px 8%;
 }
 
-.car-image{
-width:100%;
+.chat-box{
 max-width:900px;
-display:block;
 margin:auto;
-border-radius:30px;
-}
-
-.info{
-max-width:900px;
-margin:40px auto;
 background:#141414;
-padding:45px;
 border-radius:30px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(212,175,55,.12);
 }
 
-.info h1{
-font-size:50px;
-margin-bottom:30px;
-}
-
-.spec{
-margin:18px 0;
-font-size:25px;
-}
-
-.price{
-color:#d4af37;
-font-size:42px;
-margin-top:30px;
-}
-
-.actions{
-margin-top:45px;
-}
-
-.actions a{
-display:inline-block;
-margin:10px;
+.header{
 background:#d4af37;
 color:#111;
-padding:18px 35px;
-border-radius:40px;
-text-decoration:none;
+padding:25px 35px;
+font-size:30px;
 font-weight:bold;
 }
 
-</style>
-</head>
+.messages{
+padding:35px;
+}
 
+.msg{
+margin-bottom:30px;
+padding:20px 25px;
+border-radius:22px;
+max-width:75%;
+font-size:22px;
+line-height:1.7;
+}
+
+.buyer{
+background:#222;
+margin-right:auto;
+}
+
+.seller{
+background:#1d1d1d;
+margin-left:auto;
+border:1px solid #333;
+}
+
+.compose{
+padding:30px;
+display:flex;
+gap:15px;
+background:#111;
+}
+
+.compose input{
+flex:1;
+padding:18px;
+border:none;
+border-radius:18px;
+background:#222;
+color:white;
+font-size:20px;
+}
+
+.compose button{
+background:#d4af37;
+border:none;
+padding:18px 35px;
+border-radius:18px;
+font-weight:bold;
+font-size:20px;
+}
+
+.notice{
+max-width:900px;
+margin:30px auto;
+font-size:18px;
+color:#bbb;
+text-align:center;
+}
+
+</style>
+
+</head>
 <body>
 
-<section class="details">
+<section class="page">
 
-<img
-class="car-image"
-src="https://images.unsplash.com/photo-1555215695-3004980ad54e"
->
+<div class="chat-box">
 
-<div class="info">
-
-<h1>Porsche 911</h1>
-
-<div class="spec">
-السنة: 2022
-</div>
-
-<div class="spec">
-قراءة العداد: 24,000 كم
-</div>
-
-<div class="spec">
-المدينة: بغداد
-</div>
-
-<div class="spec">
-الحالة: ممتازة
-</div>
-
-<div class="price">
-$88,000
+<div class="header">
+محادثة حول Porsche 911
 </div>
 
 
-<div class="actions">
+<div class="messages">
 
-<a href="messages.html">
-راسل البائع
-</a>
+<div class="msg buyer">
+هل السيارة ما زالت متوفرة؟
+</div>
 
-<a href="requests.html">
-أطلب سيارة مشابهة
-</a>
+<div class="msg seller">
+نعم متوفرة، السيارة بحالة ممتازة.
+</div>
+
+<div class="msg buyer">
+هل السعر قابل للتفاوض؟
+</div>
+
+<div class="msg seller">
+بسيط جدًا بعد المعاينة.
+</div>
 
 </div>
 
 
+<div class="compose">
+
+<input placeholder="اكتب رسالتك">
+
+<button>
+إرسال
+</button>
+
+</div>
+
+</div>
+
+
+<div class="notice">
+سيارتي توفر وسيلة تواصل فقط وليست طرفًا في أي اتفاق بين المستخدمين.
 </div>
 
 </section>

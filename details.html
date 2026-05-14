@@ -1,85 +1,112 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>تفاصيل السيارة</title>
 
 <link rel="stylesheet" href="css/main.css">
 
 <style>
-.details{
-padding:60px 8%;
-background:#0c0c0c;
+
+.details-page{
 min-height:100vh;
+background:#0c0c0c;
+padding:70px 8%;
+}
+
+.details-box{
+max-width:900px;
+margin:auto;
+background:#141414;
+border-radius:30px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(212,175,55,.12);
 }
 
 .car-image{
 width:100%;
-max-width:900px;
-display:block;
-margin:auto;
-border-radius:30px;
+height:450px;
+object-fit:cover;
 }
 
 .info{
-max-width:900px;
-margin:40px auto;
-background:#141414;
-padding:45px;
-border-radius:30px;
+padding:40px;
+text-align:center;
 }
 
 .info h1{
-font-size:50px;
-margin-bottom:30px;
+font-size:55px;
+margin-bottom:25px;
 }
 
 .spec{
-margin:18px 0;
-font-size:25px;
+font-size:28px;
+margin-bottom:18px;
+color:#eee;
 }
 
 .price{
+font-size:50px;
 color:#d4af37;
-font-size:42px;
+font-weight:bold;
 margin-top:30px;
 }
 
 .actions{
-margin-top:45px;
+margin-top:35px;
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
 }
 
 .actions a{
-display:inline-block;
-margin:10px;
 background:#d4af37;
 color:#111;
-padding:18px 35px;
+padding:16px 32px;
 border-radius:40px;
 text-decoration:none;
+font-size:22px;
 font-weight:bold;
 }
 
-.loading{
-text-align:center;
-font-size:32px;
-padding:100px;
+.delete-btn{
+background:#c62828;
+color:white;
+border:none;
+padding:16px 32px;
+border-radius:40px;
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
 }
+
 </style>
+
 </head>
 
 <body>
 
-<section class="details">
+<section class="details-page">
 
-<div id="carDetails" class="loading">
-جاري تحميل تفاصيل السيارة...
+<div class="details-box">
+
+<div id="carDetails">
+
+</div>
+
 </div>
 
 </section>
 
 <script type="module" src="js/app.js"></script>
 
+<script type="module" src="js/deletecar.js"></script>
+
 </body>
+
 </html>

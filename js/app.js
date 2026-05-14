@@ -1,5 +1,3 @@
-// Firebase Scripts
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
@@ -40,37 +38,60 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-
-
 console.log("Firebase Connected Successfully");
 
 
 
-// تجربة إضافة سيارة
+// SELL FORM
 
-async function testCar(){
+const sellForm = document.getElementById("sellForm");
+
+if(sellForm){
+
+sellForm.addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const carData = {
+
+name: document.getElementById("carName").value,
+
+year: document.getElementById("carYear").value,
+
+price: document.getElementById("carPrice").value,
+
+city: document.getElementById("carCity").value,
+
+mileage: document.getElementById("carMileage").value,
+
+phone: document.getElementById("carPhone").value,
+
+description: document.getElementById("carDescription").value,
+
+createdAt: new Date()
+
+};
+
+
 
 try{
 
-await addDoc(collection(db,"cars"),{
+await addDoc(collection(db,"cars"),carData);
 
-name:"BMW X7",
+alert("تم نشر السيارة بنجاح");
 
-price:"57000",
+sellForm.reset();
 
-city:"Baghdad"
-
-});
-
-console.log("Car Added");
+console.log("Car Added Successfully");
 
 }catch(error){
 
 console.log(error);
 
-}
+alert("حدث خطأ");
 
 }
 
+});
 
-testCar();
+}

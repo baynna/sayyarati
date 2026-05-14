@@ -6,7 +6,9 @@ collection,
 addDoc,
 getDocs,
 query,
-orderBy
+orderBy,
+doc,
+getDoc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -84,14 +86,14 @@ const snapshot = await getDocs(carsQuery);
 
 firebaseCars.innerHTML = "";
 
-snapshot.forEach(function(doc){
+snapshot.forEach(function(document){
 
-const car = doc.data();
+const car = document.data();
 
 firebaseCars.innerHTML += `
 
 <div class="card">
-<a href="details.html">
+<a href="details.html?id=${document.id}">
 <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
 <h3>${car.name}</h3>
 <p>${car.year} | ${car.city} | ${car.price}</p>
@@ -113,5 +115,100 @@ console.log(error);
 }
 
 loadCars();
+
+}
+
+
+// تفاصيل السيارة
+const carDetails = document.getElementById("carDetails");
+
+if(carDetails){
+
+const params = new URLSearchParams(window.location.search);
+const carId = params.get("id");
+
+async function loadCarDetails(){
+
+try{
+
+if(!carId){
+carDetails.innerHTML = "لا يوجد رقم إعلان";
+return;
+}
+
+const docRef = doc(db,"cars",carId);
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const car = docSnap.data();
+
+carDetails.innerHTML = `
+
+<img
+class="car-image"
+src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+>
+
+<div class="info">
+
+<h1>${car.name}</h1>
+
+<div class="spec">
+السنة: ${car.year}
+</div>
+
+<div class="spec">
+قراءة العداد: ${car.mileage}
+</div>
+
+<div class="spec">
+المدينة: ${car.city}
+</div>
+
+<div class="spec">
+رقم الهاتف: ${car.phone}
+</div>
+
+<div class="spec">
+الوصف: ${car.description}
+</div>
+
+<div class="price">
+${car.price}
+</div>
+
+<div class="actions">
+
+<a href="messages.html">
+راسل البائع
+</a>
+
+<a href="requests.html">
+اطلب سيارة مشابهة
+</a>
+
+</div>
+
+</div>
+
+`;
+
+}else{
+
+carDetails.innerHTML = "السيارة غير موجودة";
+
+}
+
+}catch(error){
+
+console.log(error);
+carDetails.innerHTML = "حدث خطأ أثناء تحميل تفاصيل السيارة";
+
+}
+
+}
+
+loadCarDetails();
 
 }

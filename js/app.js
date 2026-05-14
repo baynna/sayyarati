@@ -14,7 +14,8 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
 getAuth,
-createUserWithEmailAndPassword
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -246,6 +247,39 @@ window.location.href = "index.html";
 console.log(error);
 
 alert("حدث خطأ أثناء إنشاء الحساب");
+
+}
+
+});
+
+}
+
+
+// تسجيل الدخول
+const loginForm = document.getElementById("loginForm");
+
+if(loginForm){
+
+loginForm.addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const email = document.getElementById("loginEmail").value;
+const password = document.getElementById("loginPassword").value;
+
+try{
+
+await signInWithEmailAndPassword(auth,email,password);
+
+alert("تم تسجيل الدخول بنجاح");
+
+window.location.href = "index.html";
+
+}catch(error){
+
+console.log(error);
+
+alert("البريد الإلكتروني أو كلمة المرور غير صحيحة");
 
 }
 

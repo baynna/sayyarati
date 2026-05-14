@@ -15,7 +15,7 @@ padding:70px 8%;
 }
 
 .box{
-max-width:800px;
+max-width:850px;
 margin:auto;
 background:#141414;
 padding:50px;
@@ -36,13 +36,6 @@ margin:25px 0;
 word-break:break-all;
 }
 
-.account-note{
-font-size:21px;
-color:#ddd;
-line-height:1.8;
-margin:25px 0;
-}
-
 .logout-btn{
 width:100%;
 background:#d4af37;
@@ -56,25 +49,57 @@ cursor:pointer;
 margin-top:25px;
 }
 
-.account-links{
-margin-top:35px;
-display:flex;
-gap:15px;
-justify-content:center;
-flex-wrap:wrap;
+.loading{
+font-size:28px;
+color:#ddd;
 }
 
-.account-links a{
-background:#222;
-color:#fff;
-padding:14px 24px;
+.my-cars-section{
+max-width:850px;
+margin:45px auto 0;
+background:#141414;
+padding:40px;
+border-radius:30px;
+box-shadow:0 0 25px rgba(212,175,55,.10);
+}
+
+.my-cars-section h2{
+font-size:38px;
+margin-bottom:30px;
+text-align:center;
+}
+
+.my-car{
+background:#1d1d1d;
+padding:25px;
+border-radius:22px;
+margin-bottom:20px;
+}
+
+.my-car h3{
+font-size:28px;
+margin-bottom:12px;
+}
+
+.my-car p{
+font-size:21px;
+color:#ddd;
+margin-bottom:18px;
+}
+
+.my-car a{
+display:inline-block;
+background:#d4af37;
+color:#111;
+padding:12px 28px;
 border-radius:30px;
 text-decoration:none;
 font-weight:bold;
 }
 
-.loading{
-font-size:28px;
+.empty{
+text-align:center;
+font-size:22px;
 color:#ddd;
 }
 </style>
@@ -93,9 +118,20 @@ color:#ddd;
 
 </div>
 
+<div class="my-cars-section">
+
+<h2>إعلاناتي</h2>
+
+<div id="myCarsBox" class="empty">
+جاري تحميل إعلاناتك...
+</div>
+
+</div>
+
 </section>
 
 <script type="module" src="js/account.js"></script>
+<script type="module" src="js/mycars.js"></script>
 
 </body>
 </html>

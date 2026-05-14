@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="css/main.css">
 
 <style>
-
 .account{
 min-height:100vh;
 background:#0c0c0c;
@@ -27,21 +26,24 @@ text-align:center;
 
 .box h1{
 font-size:50px;
-margin-bottom:40px;
+margin-bottom:30px;
 }
 
-.input{
-width:100%;
-padding:18px;
-margin-bottom:25px;
-border:none;
-border-radius:18px;
-font-size:20px;
-background:#222;
-color:white;
+.user-email{
+font-size:26px;
+color:#d4af37;
+margin:25px 0;
+word-break:break-all;
 }
 
-.btn{
+.account-note{
+font-size:21px;
+color:#ddd;
+line-height:1.8;
+margin:25px 0;
+}
+
+.logout-btn{
 width:100%;
 background:#d4af37;
 color:#111;
@@ -51,13 +53,30 @@ border-radius:40px;
 font-size:22px;
 font-weight:bold;
 cursor:pointer;
+margin-top:25px;
 }
 
-.user{
-margin-top:30px;
-font-size:22px;
+.account-links{
+margin-top:35px;
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
 }
 
+.account-links a{
+background:#222;
+color:#fff;
+padding:14px 24px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.loading{
+font-size:28px;
+color:#ddd;
+}
 </style>
 
 </head>
@@ -66,23 +85,17 @@ font-size:22px;
 
 <section class="account">
 
-<div class="box">
+<div id="accountBox" class="box">
 
-<h1>حسابي</h1>
-
-<input class="input" type="text" placeholder="رقم الهاتف">
-
-<button class="btn">
-إرسال رمز التحقق
-</button>
-
-<div class="user">
-سيتم تسجيل الدخول عبر كود SMS
+<div class="loading">
+جاري تحميل بيانات الحساب...
 </div>
 
 </div>
 
 </section>
+
+<script type="module" src="js/account.js"></script>
 
 </body>
 </html>

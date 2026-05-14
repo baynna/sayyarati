@@ -36,7 +36,7 @@ const auth = getAuth(app);
 console.log("Firebase Connected Successfully");
 
 
-// حفظ إعلان السيارة
+// حفظ إعلان السيارة وربطه بصاحب الحساب
 const sellForm = document.getElementById("sellForm");
 
 if(sellForm){
@@ -44,6 +44,18 @@ if(sellForm){
 sellForm.addEventListener("submit", async function(e){
 
 e.preventDefault();
+
+const user = auth.currentUser;
+
+if(!user){
+
+alert("يجب تسجيل الدخول قبل نشر إعلان");
+
+window.location.href = "login.html";
+
+return;
+
+}
 
 const carData = {
 name: document.getElementById("carName").value,
@@ -53,6 +65,8 @@ city: document.getElementById("carCity").value,
 mileage: document.getElementById("carMileage").value,
 phone: document.getElementById("carPhone").value,
 description: document.getElementById("carDescription").value,
+ownerId: user.uid,
+ownerEmail: user.email,
 createdAt: new Date()
 };
 
@@ -180,6 +194,10 @@ src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
 
 <div class="spec">
 الوصف: ${car.description}
+</div>
+
+<div class="spec">
+المعلن: ${car.ownerEmail || "غير محدد"}
 </div>
 
 <div class="price">

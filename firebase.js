@@ -1,4 +1,9 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+initializeApp,
+getApps,
+getApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getFirestore
@@ -20,9 +25,9 @@ appId: "1:1023141775148:web:76ac773a46f1f4daaf4e89",
 measurementId: "G-ZKZZK90BEY"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-console.log("Firebase base file loaded");
+console.log("Firebase base file loaded safely");

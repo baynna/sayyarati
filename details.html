@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="css/main.css">
 
 <style>
-
 .details{
 padding:60px 8%;
 background:#0c0c0c;
@@ -62,6 +61,11 @@ text-decoration:none;
 font-weight:bold;
 }
 
+.loading{
+text-align:center;
+font-size:32px;
+padding:100px;
+}
 </style>
 </head>
 
@@ -69,51 +73,13 @@ font-weight:bold;
 
 <section class="details">
 
-<img
-class="car-image"
-src="https://images.unsplash.com/photo-1555215695-3004980ad54e"
->
-
-<div class="info">
-
-<h1>Porsche 911</h1>
-
-<div class="spec">
-السنة: 2022
-</div>
-
-<div class="spec">
-قراءة العداد: 24,000 كم
-</div>
-
-<div class="spec">
-المدينة: بغداد
-</div>
-
-<div class="spec">
-الحالة: ممتازة
-</div>
-
-<div class="price">
-$88,000
-</div>
-
-
-<div class="actions">
-
-<a href="messages.html">
-راسل البائع
-</a>
-
-<a href="requests.html">
-اطلب سيارة مشابهة
-</a>
-
-</div>
-
+<div id="carDetails" class="loading">
+جاري تحميل تفاصيل السيارة...
 </div>
 
 </section>
+
+<script type="module" src="js/app.js"></script>
 
 </body>
 </html>

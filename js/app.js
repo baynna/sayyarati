@@ -12,6 +12,12 @@ getDoc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+import {
+getAuth,
+createUserWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 const firebaseConfig = {
 apiKey: "AIzaSyAF7HH6y4jx4DWeIR97nui09SQ46eHc6Iw",
 authDomain: "sayyarati-cars.firebaseapp.com",
@@ -24,6 +30,7 @@ measurementId: "G-ZKZZK90BEY"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 console.log("Firebase Connected Successfully");
 
@@ -210,5 +217,38 @@ carDetails.innerHTML = "حدث خطأ أثناء تحميل تفاصيل الس�
 }
 
 loadCarDetails();
+
+}
+
+
+// إنشاء حساب جديد
+const registerForm = document.getElementById("registerForm");
+
+if(registerForm){
+
+registerForm.addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const email = document.getElementById("registerEmail").value;
+const password = document.getElementById("registerPassword").value;
+
+try{
+
+await createUserWithEmailAndPassword(auth,email,password);
+
+alert("تم إنشاء الحساب بنجاح");
+
+window.location.href = "index.html";
+
+}catch(error){
+
+console.log(error);
+
+alert("حدث خطأ أثناء إنشاء الحساب");
+
+}
+
+});
 
 }

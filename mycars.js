@@ -13,6 +13,8 @@ getDocs
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+console.log("mycars.js loaded successfully");
+
 const myCarsBox = document.getElementById("myCarsBox");
 
 if(myCarsBox){
@@ -20,8 +22,11 @@ if(myCarsBox){
 onAuthStateChanged(auth, async function(user){
 
 if(!user){
+
 myCarsBox.innerHTML = "يجب تسجيل الدخول لعرض إعلاناتك";
+
 return;
+
 }
 
 try{
@@ -64,6 +69,8 @@ myCarsBox.innerHTML += `
 `;
 
 });
+
+console.log("My cars loaded successfully");
 
 }catch(error){
 

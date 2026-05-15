@@ -39,7 +39,7 @@ const auth = getAuth(app);
 console.log("Firebase Connected Successfully");
 
 
-// تحويل الصورة إلى صورة صغيرة محفوظة داخل Firestore
+// تصغير الصورة
 function resizeImage(file){
 
 return new Promise(function(resolve,reject){
@@ -94,7 +94,7 @@ reader.readAsDataURL(file);
 }
 
 
-// حفظ إعلان السيارة وربطه بصاحب الحساب
+// نشر السيارة
 const sellForm = document.getElementById("sellForm");
 
 if(sellForm){
@@ -117,7 +117,7 @@ return;
 
 try{
 
-const imageInput = document.getElementById("carImages");
+const imageInput = document.getElementById("carImage");
 
 let imageUrls = [];
 
@@ -132,18 +132,31 @@ imageUrls.push(smallImage);
 }
 
 const carData = {
+
 name: document.getElementById("carName").value,
+
 year: document.getElementById("carYear").value,
+
 price: document.getElementById("carPrice").value,
+
 city: document.getElementById("carCity").value,
+
 mileage: document.getElementById("carMileage").value,
+
 phone: document.getElementById("carPhone").value,
+
 description: document.getElementById("carDescription").value,
+
 ownerId: user.uid,
+
 ownerEmail: user.email,
+
 createdAt: serverTimestamp(),
+
 images: imageUrls,
+
 image: imageUrls[0] || "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+
 };
 
 await addDoc(collection(db,"cars"),carData);
@@ -167,7 +180,7 @@ alert("حدث خطأ أثناء نشر الإعلان");
 }
 
 
-// عرض السيارات في الصفحة الرئيسية
+// عرض السيارات
 const firebaseCars = document.getElementById("firebaseCars");
 
 if(firebaseCars){
@@ -325,18 +338,6 @@ ${gallery}
 ${car.price}
 </div>
 
-<div class="actions">
-
-<a href="messages.html">
-راسل البائع
-</a>
-
-<a href="requests.html">
-اطلب سيارة مشابهة
-</a>
-
-</div>
-
 </div>
 
 `;
@@ -362,7 +363,7 @@ loadCarDetails();
 }
 
 
-// إنشاء حساب جديد
+// إنشاء حساب
 const registerForm = document.getElementById("registerForm");
 
 if(registerForm){

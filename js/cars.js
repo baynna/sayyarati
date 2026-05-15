@@ -40,45 +40,94 @@ snapshot.forEach(function(doc){
 
 const car = doc.data();
 
+const carImage = car.image || "https://images.unsplash.com/photo-1503376780353-7e6692767b70";
+
 carsBox.innerHTML += `
 
 <div style="
-background:#1a1a1a;
-padding:25px;
-border-radius:25px;
-margin-bottom:20px;
-color:white;
-box-shadow:0 0 15px rgba(212,175,55,.15);
+background:#141414;
+border-radius:30px;
+overflow:hidden;
+margin-bottom:35px;
+box-shadow:0 0 25px rgba(212,175,55,.12);
 ">
 
-<h2 style="margin-bottom:10px;">
+<img
+src="${carImage}"
+style="
+width:100%;
+height:260px;
+object-fit:cover;
+display:block;
+"
+>
 
-${car.name}
+<div style="padding:25px;">
+
+<h2 style="
+font-size:32px;
+margin-bottom:15px;
+color:white;
+">
+
+${car.name || "سيارة بدون اسم"}
 
 </h2>
 
-<p>
+<div style="
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:20px;
+">
 
-${car.year} | ${car.city}
+<span style="
+background:#222;
+padding:10px 18px;
+border-radius:15px;
+color:#d4af37;
+font-size:18px;
+">
 
-</p>
+${car.year || "السنة غير محددة"}
 
-<p style="margin-top:10px;">
+</span>
 
-${car.price}
+<span style="
+background:#222;
+padding:10px 18px;
+border-radius:15px;
+color:#d4af37;
+font-size:18px;
+">
 
-</p>
+${car.city || "المدينة غير محددة"}
+
+</span>
+
+</div>
+
+<div style="
+font-size:34px;
+font-weight:bold;
+margin-bottom:25px;
+color:#d4af37;
+">
+
+${car.price || "السعر غير محدد"}
+
+</div>
 
 <a
 href="details.html?id=${doc.id}"
 style="
 display:inline-block;
-margin-top:15px;
 background:#d4af37;
 color:#111;
-padding:10px 20px;
-border-radius:15px;
+padding:14px 28px;
+border-radius:18px;
 text-decoration:none;
+font-size:20px;
 font-weight:bold;
 "
 >
@@ -86,6 +135,8 @@ font-weight:bold;
 عرض التفاصيل
 
 </a>
+
+</div>
 
 </div>
 

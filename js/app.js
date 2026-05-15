@@ -32,16 +32,22 @@ const firebaseConfig = {
 apiKey: "AIzaSyAF7HH6y4jx4DWeIR97nui09SQ46eHc6Iw",
 authDomain: "sayyarati-cars.firebaseapp.com",
 projectId: "sayyarati-cars",
-storageBucket: "sayyarati-cars.firebasestorage.app",
+storageBucket: "sayyarati-cars.appspot.com",
 messagingSenderId: "1023141775148",
 appId: "1:1023141775148:web:76ac773a46f1f4daaf4e89",
 measurementId: "G-ZKZZK90BEY"
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
+
 const auth = getAuth(app);
-const storage = getStorage(app);
+
+const storage = getStorage(
+app,
+"gs://sayyarati-cars.appspot.com"
+);
 
 console.log("Firebase Connected Successfully");
 
@@ -69,7 +75,7 @@ return;
 
 try{
 
-const imageInput = document.getElementById("carImages");
+const imageInput = document.getElementById("carImage");
 
 let imageUrls = [];
 

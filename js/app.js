@@ -75,7 +75,7 @@ return;
 
 try{
 
-const imageInput = document.getElementById("carImage");
+const imageInput = document.getElementById("carImages");
 
 let imageUrls = [];
 

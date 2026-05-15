@@ -29,29 +29,18 @@ getDownloadURL
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 const firebaseConfig = {
-
 apiKey: "AIzaSyAF7HH6y4jx4DWeIR97nui09SQ46eHc6Iw",
-
 authDomain: "sayyarati-cars.firebaseapp.com",
-
 projectId: "sayyarati-cars",
-
 storageBucket: "sayyarati-cars.firebasestorage.app",
-
 messagingSenderId: "1023141775148",
-
 appId: "1:1023141775148:web:76ac773a46f1f4daaf4e89",
-
 measurementId: "G-ZKZZK90BEY"
-
 };
 
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-
 const auth = getAuth(app);
-
 const storage = getStorage(app);
 
 console.log("Firebase Connected Successfully");
@@ -82,9 +71,11 @@ try{
 
 const imageInput = document.getElementById("carImages");
 
-const files = imageInput.files;
-
 let imageUrls = [];
+
+if(imageInput && imageInput.files.length > 0){
+
+const files = imageInput.files;
 
 for(let i = 0; i < files.length; i++){
 
@@ -103,32 +94,21 @@ imageUrls.push(downloadURL);
 
 }
 
+}
+
 const carData = {
-
 name: document.getElementById("carName").value,
-
 year: document.getElementById("carYear").value,
-
 price: document.getElementById("carPrice").value,
-
 city: document.getElementById("carCity").value,
-
 mileage: document.getElementById("carMileage").value,
-
 phone: document.getElementById("carPhone").value,
-
 description: document.getElementById("carDescription").value,
-
 ownerId: user.uid,
-
 ownerEmail: user.email,
-
 createdAt: serverTimestamp(),
-
 images: imageUrls,
-
-image: imageUrls[0] || ""
-
+image: imageUrls[0] || "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
 };
 
 await addDoc(collection(db,"cars"),carData);
@@ -180,7 +160,7 @@ firebaseCars.innerHTML += `
 
 <a href="details.html?id=${document.id}">
 
-<img src="${car.image}">
+<img src="${car.image || "https://images.unsplash.com/photo-1503376780353-7e6692767b70"}">
 
 <h3>${car.name}</h3>
 
@@ -244,7 +224,7 @@ const car = docSnap.data();
 
 let gallery = "";
 
-if(car.images){
+if(car.images && car.images.length > 0){
 
 car.images.forEach(function(img){
 
@@ -259,6 +239,18 @@ style="margin-bottom:15px;border-radius:20px;"
 `;
 
 });
+
+}else{
+
+gallery = `
+
+<img
+src="${car.image || "https://images.unsplash.com/photo-1503376780353-7e6692767b70"}"
+class="car-image"
+style="margin-bottom:15px;border-radius:20px;"
+>
+
+`;
 
 }
 

@@ -9,7 +9,7 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 console.log("carimages.js loaded successfully");
 
-const imageInput = document.getElementById("carImage");
+const imageInput = document.getElementById("carImages");
 
 let uploadedImageUrl = "";
 

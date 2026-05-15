@@ -38,6 +38,9 @@ export const db = getFirestore(app);
 
 export const auth = getAuth(app);
 
-export const storage = getStorage(app);
+export const storage = getStorage(
+app,
+"gs://sayyarati-cars.appspot.com"
+);
 
 console.log("Firebase base file loaded safely");

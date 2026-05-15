@@ -9,7 +9,8 @@ import {
 collection,
 query,
 where,
-getDocs
+getDocs,
+orderBy
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -32,8 +33,13 @@ return;
 try{
 
 const q = query(
+
 collection(db,"cars"),
-where("ownerId","==",user.uid)
+
+where("ownerId","==",user.uid),
+
+orderBy("createdAt","desc")
+
 );
 
 const snapshot = await getDocs(q);
@@ -56,9 +62,26 @@ myCarsBox.innerHTML += `
 
 <div class="my-car">
 
+<img
+src="${car.image}"
+style="
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:18px;
+margin-bottom:18px;
+"
+>
+
 <h3>${car.name}</h3>
 
-<p>${car.year} | ${car.city} | ${car.price}</p>
+<p>
+
+${car.year} |
+${car.city} |
+${car.price}
+
+</p>
 
 <a href="details.html?id=${document.id}">
 عرض التفاصيل

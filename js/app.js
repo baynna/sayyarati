@@ -39,7 +39,7 @@ const auth = getAuth(app);
 console.log("Firebase Connected Successfully");
 
 
-// حفظ إعلان السيارة وربطه بصاحب الحساب
+// نشر السيارة
 const sellForm = document.getElementById("sellForm");
 
 if(sellForm){
@@ -47,18 +47,6 @@ if(sellForm){
 sellForm.addEventListener("submit", async function(e){
 
 e.preventDefault();
-
-const user = auth.currentUser;
-
-if(!user){
-
-alert("يجب تسجيل الدخول قبل نشر إعلان");
-
-window.location.href = "login.html";
-
-return;
-
-}
 
 const carData = {
 
@@ -75,10 +63,6 @@ mileage: document.getElementById("carMileage").value,
 phone: document.getElementById("carPhone").value,
 
 description: document.getElementById("carDescription").value,
-
-ownerId: user.uid,
-
-ownerEmail: user.email,
 
 createdAt: serverTimestamp(),
 
@@ -109,7 +93,7 @@ alert("حدث خطأ أثناء نشر الإعلان");
 }
 
 
-// عرض السيارات في الصفحة الرئيسية
+// عرض السيارات
 const firebaseCars = document.getElementById("firebaseCars");
 
 if(firebaseCars){
@@ -230,10 +214,6 @@ src="${car.image}"
 الوصف: ${car.description}
 </div>
 
-<div class="spec">
-المعلن: ${car.ownerEmail || "غير محدد"}
-</div>
-
 <div class="price">
 ${car.price}
 </div>
@@ -264,7 +244,7 @@ carDetails.innerHTML = "السيارة غير موجودة";
 
 console.log(error);
 
-carDetails.innerHTML = "حدث خطأ أثناء تحميل تفاصيل السيارة";
+carDetails.innerHTML = "حدث خطأ أثناء تحميل التفاصيل";
 
 }
 
@@ -275,7 +255,7 @@ loadCarDetails();
 }
 
 
-// إنشاء حساب جديد
+// إنشاء حساب
 const registerForm = document.getElementById("registerForm");
 
 if(registerForm){

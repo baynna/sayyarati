@@ -60,9 +60,17 @@ myCarsBox.innerHTML += `
 
 <p>${car.year} | ${car.city} | ${car.price}</p>
 
+<div class="my-actions">
+
 <a href="details.html?id=${document.id}">
 عرض التفاصيل
 </a>
+
+<a href="edit.html?id=${document.id}">
+تعديل الإعلان
+</a>
+
+</div>
 
 </div>
 

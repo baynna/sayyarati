@@ -20,14 +20,6 @@ signInWithEmailAndPassword
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
-getStorage,
-ref,
-uploadBytes,
-getDownloadURL
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-
 const firebaseConfig = {
 apiKey: "AIzaSyAF7HH6y4jx4DWeIR97nui09SQ46eHc6Iw",
 authDomain: "sayyarati-cars.firebaseapp.com",
@@ -44,12 +36,62 @@ const db = getFirestore(app);
 
 const auth = getAuth(app);
 
-const storage = getStorage(
-app,
-"gs://sayyarati-cars.appspot.com"
-);
-
 console.log("Firebase Connected Successfully");
+
+
+// تحويل الصورة إلى صورة صغيرة محفوظة داخل Firestore
+function resizeImage(file){
+
+return new Promise(function(resolve,reject){
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+const img = new Image();
+
+img.onload = function(){
+
+const canvas = document.createElement("canvas");
+
+const maxWidth = 700;
+
+let width = img.width;
+let height = img.height;
+
+if(width > maxWidth){
+
+height = height * (maxWidth / width);
+width = maxWidth;
+
+}
+
+canvas.width = width;
+canvas.height = height;
+
+const ctx = canvas.getContext("2d");
+
+ctx.drawImage(img,0,0,width,height);
+
+const dataUrl = canvas.toDataURL("image/jpeg",0.65);
+
+resolve(dataUrl);
+
+};
+
+img.onerror = reject;
+
+img.src = event.target.result;
+
+};
+
+reader.onerror = reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
 
 
 // حفظ إعلان السيارة وربطه بصاحب الحساب
@@ -81,24 +123,11 @@ let imageUrls = [];
 
 if(imageInput && imageInput.files.length > 0){
 
-const files = imageInput.files;
+const firstFile = imageInput.files[0];
 
-for(let i = 0; i < files.length; i++){
+const smallImage = await resizeImage(firstFile);
 
-const file = files[i];
-
-const storageRef = ref(
-storage,
-`cars/${Date.now()}-${file.name}`
-);
-
-await uploadBytes(storageRef,file);
-
-const downloadURL = await getDownloadURL(storageRef);
-
-imageUrls.push(downloadURL);
-
-}
+imageUrls.push(smallImage);
 
 }
 

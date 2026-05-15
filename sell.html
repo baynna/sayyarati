@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>أضف سيارتك للبيع</title>
 
 <link rel="stylesheet" href="css/main.css">
 
 <style>
+
 .sell-page{
 min-height:100vh;
 background:#0c0c0c;
@@ -55,6 +60,20 @@ height:140px;
 resize:none;
 }
 
+.file-input{
+background:#222;
+padding:20px;
+border-radius:18px;
+color:white;
+width:100%;
+}
+
+.note{
+margin-top:10px;
+font-size:18px;
+color:#bbb;
+}
+
 .publish{
 margin-top:35px;
 width:100%;
@@ -67,9 +86,11 @@ font-size:24px;
 font-weight:bold;
 cursor:pointer;
 }
+
 </style>
 
 </head>
+
 <body>
 
 <section class="sell-page">
@@ -81,42 +102,94 @@ cursor:pointer;
 <form id="sellForm">
 
 <div class="field">
+
 <label>اسم السيارة</label>
+
 <input id="carName" type="text" required>
+
 </div>
 
+
 <div class="field">
+
 <label>السنة</label>
+
 <input id="carYear" type="text" required>
+
 </div>
 
+
 <div class="field">
+
 <label>السعر</label>
+
 <input id="carPrice" type="text" required>
+
 </div>
 
+
 <div class="field">
+
 <label>المدينة</label>
+
 <input id="carCity" type="text" required>
+
 </div>
 
+
 <div class="field">
+
 <label>قراءة العداد</label>
+
 <input id="carMileage" type="text" required>
+
 </div>
 
+
 <div class="field">
+
 <label>رقم الهاتف</label>
+
 <input id="carPhone" type="text" required>
+
 </div>
 
+
 <div class="field">
+
 <label>وصف السيارة</label>
+
 <textarea id="carDescription" required></textarea>
+
 </div>
+
+
+<div class="field">
+
+<label>صور السيارة</label>
+
+<input
+id="carImages"
+class="file-input"
+type="file"
+accept="image/*"
+multiple
+required
+>
+
+<div class="note">
+
+يمكنك رفع عدة صور للسيارة
+
+</div>
+
+</div>
+
 
 <button class="publish" type="submit">
+
 نشر الإعلان
+
 </button>
 
 </form>
@@ -128,4 +201,5 @@ cursor:pointer;
 <script type="module" src="js/app.js"></script>
 
 </body>
+
 </html>

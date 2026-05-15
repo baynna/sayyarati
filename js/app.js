@@ -20,14 +20,30 @@ signInWithEmailAndPassword
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+import {
+getStorage,
+ref,
+uploadBytes,
+getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
 const firebaseConfig = {
+
 apiKey: "AIzaSyAF7HH6y4jx4DWeIR97nui09SQ46eHc6Iw",
+
 authDomain: "sayyarati-cars.firebaseapp.com",
+
 projectId: "sayyarati-cars",
+
 storageBucket: "sayyarati-cars.firebasestorage.app",
+
 messagingSenderId: "1023141775148",
+
 appId: "1:1023141775148:web:76ac773a46f1f4daaf4e89",
+
 measurementId: "G-ZKZZK90BEY"
+
 };
 
 const app = initializeApp(firebaseConfig);
@@ -35,6 +51,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const auth = getAuth(app);
+
+const storage = getStorage(app);
 
 console.log("Firebase Connected Successfully");
 
@@ -60,6 +78,31 @@ return;
 
 }
 
+try{
+
+const imageInput = document.getElementById("carImages");
+
+const files = imageInput.files;
+
+let imageUrls = [];
+
+for(let i = 0; i < files.length; i++){
+
+const file = files[i];
+
+const storageRef = ref(
+storage,
+`cars/${Date.now()}-${file.name}`
+);
+
+await uploadBytes(storageRef,file);
+
+const downloadURL = await getDownloadURL(storageRef);
+
+imageUrls.push(downloadURL);
+
+}
+
 const carData = {
 
 name: document.getElementById("carName").value,
@@ -82,11 +125,11 @@ ownerEmail: user.email,
 
 createdAt: serverTimestamp(),
 
-image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+images: imageUrls,
+
+image: imageUrls[0] || ""
 
 };
-
-try{
 
 await addDoc(collection(db,"cars"),carData);
 
@@ -199,12 +242,29 @@ if(docSnap.exists()){
 
 const car = docSnap.data();
 
-carDetails.innerHTML = `
+let gallery = "";
+
+if(car.images){
+
+car.images.forEach(function(img){
+
+gallery += `
 
 <img
+src="${img}"
 class="car-image"
-src="${car.image}"
+style="margin-bottom:15px;border-radius:20px;"
 >
+
+`;
+
+});
+
+}
+
+carDetails.innerHTML = `
+
+${gallery}
 
 <div class="info">
 

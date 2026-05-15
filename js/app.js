@@ -8,7 +8,8 @@ getDocs,
 query,
 orderBy,
 doc,
-getDoc
+getDoc,
+serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -30,7 +31,9 @@ measurementId: "G-ZKZZK90BEY"
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
+
 const auth = getAuth(app);
 
 console.log("Firebase Connected Successfully");
@@ -58,16 +61,29 @@ return;
 }
 
 const carData = {
+
 name: document.getElementById("carName").value,
+
 year: document.getElementById("carYear").value,
+
 price: document.getElementById("carPrice").value,
+
 city: document.getElementById("carCity").value,
+
 mileage: document.getElementById("carMileage").value,
+
 phone: document.getElementById("carPhone").value,
+
 description: document.getElementById("carDescription").value,
+
 ownerId: user.uid,
+
 ownerEmail: user.email,
-createdAt: new Date()
+
+createdAt: serverTimestamp(),
+
+image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+
 };
 
 try{
@@ -102,7 +118,10 @@ async function loadCars(){
 
 try{
 
-const carsQuery = query(collection(db,"cars"), orderBy("createdAt","desc"));
+const carsQuery = query(
+collection(db,"cars"),
+orderBy("createdAt","desc")
+);
 
 const snapshot = await getDocs(carsQuery);
 
@@ -115,11 +134,21 @@ const car = document.data();
 firebaseCars.innerHTML += `
 
 <div class="card">
+
 <a href="details.html?id=${document.id}">
-<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
+
+<img src="${car.image}">
+
 <h3>${car.name}</h3>
-<p>${car.year} | ${car.city} | ${car.price}</p>
+
+<p>
+${car.year} |
+${car.city} |
+${car.price}
+</p>
+
 </a>
+
 </div>
 
 `;
@@ -147,6 +176,7 @@ const carDetails = document.getElementById("carDetails");
 if(carDetails){
 
 const params = new URLSearchParams(window.location.search);
+
 const carId = params.get("id");
 
 async function loadCarDetails(){
@@ -154,11 +184,15 @@ async function loadCarDetails(){
 try{
 
 if(!carId){
+
 carDetails.innerHTML = "لا يوجد رقم إعلان";
+
 return;
+
 }
 
 const docRef = doc(db,"cars",carId);
+
 const docSnap = await getDoc(docRef);
 
 if(docSnap.exists()){
@@ -169,7 +203,7 @@ carDetails.innerHTML = `
 
 <img
 class="car-image"
-src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+src="${car.image}"
 >
 
 <div class="info">
@@ -229,6 +263,7 @@ carDetails.innerHTML = "السيارة غير موجودة";
 }catch(error){
 
 console.log(error);
+
 carDetails.innerHTML = "حدث خطأ أثناء تحميل تفاصيل السيارة";
 
 }
@@ -250,6 +285,7 @@ registerForm.addEventListener("submit", async function(e){
 e.preventDefault();
 
 const email = document.getElementById("registerEmail").value;
+
 const password = document.getElementById("registerPassword").value;
 
 try{
@@ -283,6 +319,7 @@ loginForm.addEventListener("submit", async function(e){
 e.preventDefault();
 
 const email = document.getElementById("loginEmail").value;
+
 const password = document.getElementById("loginPassword").value;
 
 try{

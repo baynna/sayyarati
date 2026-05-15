@@ -21,21 +21,13 @@ getStorage
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 const firebaseConfig = {
-
 apiKey: "AIzaSyAF7HH6y4jx4DWeIR97nui09SQ46eHc6Iw",
-
 authDomain: "sayyarati-cars.firebaseapp.com",
-
 projectId: "sayyarati-cars",
-
 storageBucket: "sayyarati-cars.firebasestorage.app",
-
 messagingSenderId: "1023141775148",
-
 appId: "1:1023141775148:web:76ac773a46f1f4daaf4e89",
-
 measurementId: "G-ZKZZK90BEY"
-
 };
 
 const app = getApps().length

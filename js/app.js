@@ -24,7 +24,7 @@ const firebaseConfig = {
 apiKey: "AIzaSyAF7HH6y4jx4DWeIR97nui09SQ46eHc6Iw",
 authDomain: "sayyarati-cars.firebaseapp.com",
 projectId: "sayyarati-cars",
-storageBucket: "sayyarati-cars.appspot.com",
+storageBucket: "sayyarati-cars.firebasestorage.app",
 messagingSenderId: "1023141775148",
 appId: "1:1023141775148:web:76ac773a46f1f4daaf4e89",
 measurementId: "G-ZKZZK90BEY"
@@ -39,62 +39,7 @@ const auth = getAuth(app);
 console.log("Firebase Connected Successfully");
 
 
-// تصغير الصورة
-function resizeImage(file){
-
-return new Promise(function(resolve,reject){
-
-const reader = new FileReader();
-
-reader.onload = function(event){
-
-const img = new Image();
-
-img.onload = function(){
-
-const canvas = document.createElement("canvas");
-
-const maxWidth = 700;
-
-let width = img.width;
-let height = img.height;
-
-if(width > maxWidth){
-
-height = height * (maxWidth / width);
-width = maxWidth;
-
-}
-
-canvas.width = width;
-canvas.height = height;
-
-const ctx = canvas.getContext("2d");
-
-ctx.drawImage(img,0,0,width,height);
-
-const dataUrl = canvas.toDataURL("image/jpeg",0.65);
-
-resolve(dataUrl);
-
-};
-
-img.onerror = reject;
-
-img.src = event.target.result;
-
-};
-
-reader.onerror = reject;
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
-
-// نشر السيارة
+// حفظ إعلان السيارة وربطه بصاحب الحساب
 const sellForm = document.getElementById("sellForm");
 
 if(sellForm){
@@ -112,22 +57,6 @@ alert("يجب تسجيل الدخول قبل نشر إعلان");
 window.location.href = "login.html";
 
 return;
-
-}
-
-try{
-
-const imageInput = document.getElementById("carImage");
-
-let imageUrls = [];
-
-if(imageInput && imageInput.files.length > 0){
-
-const firstFile = imageInput.files[0];
-
-const smallImage = await resizeImage(firstFile);
-
-imageUrls.push(smallImage);
 
 }
 
@@ -153,11 +82,11 @@ ownerEmail: user.email,
 
 createdAt: serverTimestamp(),
 
-images: imageUrls,
-
-image: imageUrls[0] || "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
 
 };
+
+try{
 
 await addDoc(collection(db,"cars"),carData);
 
@@ -180,7 +109,7 @@ alert("حدث خطأ أثناء نشر الإعلان");
 }
 
 
-// عرض السيارات
+// عرض السيارات في الصفحة الرئيسية
 const firebaseCars = document.getElementById("firebaseCars");
 
 if(firebaseCars){
@@ -208,7 +137,7 @@ firebaseCars.innerHTML += `
 
 <a href="details.html?id=${document.id}">
 
-<img src="${car.image || "https://images.unsplash.com/photo-1503376780353-7e6692767b70"}">
+<img src="${car.image}">
 
 <h3>${car.name}</h3>
 
@@ -270,41 +199,12 @@ if(docSnap.exists()){
 
 const car = docSnap.data();
 
-let gallery = "";
-
-if(car.images && car.images.length > 0){
-
-car.images.forEach(function(img){
-
-gallery += `
-
-<img
-src="${img}"
-class="car-image"
-style="margin-bottom:15px;border-radius:20px;"
->
-
-`;
-
-});
-
-}else{
-
-gallery = `
-
-<img
-src="${car.image || "https://images.unsplash.com/photo-1503376780353-7e6692767b70"}"
-class="car-image"
-style="margin-bottom:15px;border-radius:20px;"
->
-
-`;
-
-}
-
 carDetails.innerHTML = `
 
-${gallery}
+<img
+class="car-image"
+src="${car.image}"
+>
 
 <div class="info">
 
@@ -338,6 +238,18 @@ ${gallery}
 ${car.price}
 </div>
 
+<div class="actions">
+
+<a href="messages.html">
+راسل البائع
+</a>
+
+<a href="requests.html">
+اطلب سيارة مشابهة
+</a>
+
+</div>
+
 </div>
 
 `;
@@ -363,7 +275,7 @@ loadCarDetails();
 }
 
 
-// إنشاء حساب
+// إنشاء حساب جديد
 const registerForm = document.getElementById("registerForm");
 
 if(registerForm){
